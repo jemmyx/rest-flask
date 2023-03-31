@@ -25,3 +25,6 @@ Dans C:\Users\meyer\Documents\ephemeral\dev\python :
 export FLASK_APP=~/Documents/ephemeral/dev/rest-flask/app.py
 printenv
 flask run
+
+En mode watch
+flask run --reload
