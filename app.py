@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 
@@ -26,6 +26,12 @@ bands = [
     }
 ]
 
+@app.before_request
+def verify_token():
+    if request.method == 'POST':
+        if 'X-Auth-Token' not in request.headers:
+            return jsonify({'status': 'false', 'message': 'Missing token'}), 401
+
 @app.route('/', methods=['GET'])
 def first_req():
     data = {'status': 'true','message': 'first request'}
@@ -47,4 +53,4 @@ def get_bands():
     return jsonify(data)
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
